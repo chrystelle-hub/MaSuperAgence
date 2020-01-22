@@ -18,7 +18,12 @@ security:
             # http_basic: true
             # https://symfony.com/doc/current/security.html#firewalls-authentication
 
-            form_login: true
+            form_login:
+                check_path: login
+            
+            logout:
+                path: /logout
+                target: /
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
 
@@ -27,3 +32,7 @@ security:
     access_control:
          - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+    encoders:
+        App\Entity\User:
+            algorithm: bcrypt
+            cost: 12
